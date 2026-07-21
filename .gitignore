@@ -1,0 +1,68 @@
+# Operating System files
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+
+# IDE files
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Visual Studio Code
+.vscode/
+
+
+# Build outputs
+
+build/
+out/
+target/
+dist/
+
+
+# Logs
+
+*.log
+
+
+# Environment / secrets
+
+.env
+.env.*
+*.secret
+*.key
+
+
+# Temporary files
+
+*.tmp
+*.temp
+*.swp
+
+
+# Node
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# Java
+
+.gradle/
+*.class
+
+
+# Database
+
+*.sqlite
+*.db
