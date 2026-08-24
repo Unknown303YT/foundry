@@ -1,5 +1,6 @@
 package com.riverstone.unknown303.foundry.server.account;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +16,10 @@ public class AccountController {
     }
 
     @PostMapping
-    public Account create(@RequestParam String username, @RequestParam String email) {
-        return accountService.create(username, email);
+    public Account create(@Valid @RequestBody CreateAccountRequest request) {
+        return accountService.create(
+                request.username(), request.email()
+        );
     }
 
     @GetMapping
