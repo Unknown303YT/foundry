@@ -3,6 +3,8 @@ package com.riverstone.unknown303.foundry.server.organization;
 import com.riverstone.unknown303.foundry.server.account.Account;
 import com.riverstone.unknown303.foundry.server.account.AccountService;
 import com.riverstone.unknown303.foundry.server.organization.member.*;
+import com.riverstone.unknown303.foundry.server.organization.role.OrganizationRole;
+import com.riverstone.unknown303.foundry.server.organization.role.OrganizationRoleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

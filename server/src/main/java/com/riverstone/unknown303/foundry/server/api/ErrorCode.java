@@ -10,6 +10,10 @@ public enum ErrorCode {
     ORGANIZATION_NOT_FOUND(
             HttpStatus.NOT_FOUND,
             "Organization does not exist."
+    ),
+    ROLE_NOT_FOUND(
+            HttpStatus.NOT_FOUND,
+            "Organization role does not exist."
     );
 
     private final HttpStatus status;

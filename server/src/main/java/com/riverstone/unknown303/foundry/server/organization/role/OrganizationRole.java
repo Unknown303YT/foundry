@@ -1,4 +1,4 @@
-package com.riverstone.unknown303.foundry.server.organization.member;
+package com.riverstone.unknown303.foundry.server.organization.role;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
