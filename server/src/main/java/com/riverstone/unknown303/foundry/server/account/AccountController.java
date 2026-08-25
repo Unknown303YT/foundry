@@ -1,6 +1,7 @@
 package com.riverstone.unknown303.foundry.server.account;
 
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class AccountController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Account create(@Valid @RequestBody CreateAccountRequest request) {
         return accountService.create(
                 request.username(), request.email()
@@ -29,11 +31,12 @@ public class AccountController {
 
     @GetMapping("/{id}")
     public Account findById(@PathVariable UUID id) {
-        return accountService.findById(id).orElse(null);
+        return accountService.findById(id);
     }
 
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable UUID id) {
-        return accountService.delete(id);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable UUID id) {
+        accountService.delete(id);
     }
 }

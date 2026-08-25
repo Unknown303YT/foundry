@@ -6,26 +6,33 @@ import java.util.*;
 
 @Service
 public class AccountService {
-    private final Map<UUID, Account> accounts = new HashMap<>();
+    private final AccountRepository repository;
+
+    public AccountService(AccountRepository repository) {
+        this.repository = repository;
+    }
 
     public Account create(String username, String email) {
         UUID id = UUID.randomUUID();
 
         Account account = new Account(id, username, email);
-        accounts.put(id, account);
 
-        return account;
+        return repository.save(account);
     }
 
-    public Optional<Account> findById(UUID id) {
-        return Optional.ofNullable(accounts.get(id));
+    public Account findById(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new AccountNotFoundException(id));
     }
 
     public List<Account> findAll() {
-        return List.copyOf(accounts.values());
+        return repository.findAll();
     }
 
-    public boolean delete(UUID id) {
-        return accounts.remove(id) != null;
+    public void delete(UUID id) {
+        if (!repository.existsById(id))
+            throw new AccountNotFoundException(id);
+
+        repository.deleteById(id);
     }
 }

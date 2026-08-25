@@ -1,13 +1,24 @@
 package com.riverstone.unknown303.foundry.server.account;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.UUID;
 
+@Entity
 public class Account {
-    private final UUID id;
-    private final String username;
-    private final String email;
 
-    Account(UUID id, String username, String email) {
+    @Id
+    private UUID id;
+
+    private String username;
+
+    private String email;
+
+    protected Account() {
+    }
+
+    public Account(UUID id, String username, String email) {
         this.id = id;
         this.username = username;
         this.email = email;
