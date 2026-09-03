@@ -14,6 +14,10 @@ public enum ErrorCode {
     ROLE_NOT_FOUND(
             HttpStatus.NOT_FOUND,
             "Organization role does not exist."
+    ),
+    MEMBERSHIP_NOT_FOUND(
+            HttpStatus.NOT_FOUND,
+            "Organization membership does not exist."
     );
 
     private final HttpStatus status;

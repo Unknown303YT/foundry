@@ -9,12 +9,19 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/")
 public class OrganizationMembershipController {
     private final OrganizationMembershipService service;
 
     public OrganizationMembershipController(OrganizationMembershipService service) {
         this.service = service;
+    }
+
+    @GetMapping("/memberships/{id}")
+    public OrganizationMembership findById(
+            @PathVariable UUID id
+    ) {
+        return service.findById(id);
     }
 
     @GetMapping("/organizations/{organizationId}/members")
