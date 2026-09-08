@@ -43,7 +43,7 @@ public class OrganizationService {
 
         OrganizationRole ownerRole = new OrganizationRole(
                 UUID.randomUUID(),
-                organization.getId(),
+                organization,
                 "Owner",
                 true
         );
@@ -52,9 +52,9 @@ public class OrganizationService {
 
         OrganizationMembership membership = new OrganizationMembership(
                 UUID.randomUUID(),
-                creator.getId(),
-                organization.getId(),
-                ownerRole.getId()
+                creator,
+                organization,
+                ownerRole
         );
 
         membershipRepository.save(membership);
@@ -72,22 +72,26 @@ public class OrganizationService {
     }
 
     public boolean isMember(UUID accountId, UUID organizationId) {
-        return membershipRepository.existsByAccountIdAndOrganizationId(
-                accountId,
-                organizationId
+        Account account = accountService.findById(accountId);
+        Organization organization = findById(organizationId);
+
+        return membershipRepository.existsByAccountAndOrganization(
+                account,
+                organization
         );
     }
 
     public List<OrganizationMemberResponse> findMembers(UUID organizationId) {
-        findById(organizationId);
+        Organization organization = findById(organizationId);
 
-        return membershipRepository.findByOrganizationId(organizationId)
+        return membershipRepository.findByOrganization(organization)
                 .stream()
                 .map(membership -> new OrganizationMemberResponse(
-                        membership.getAccountId(),
-                        membership.getOrganizationId(),
-                        membership.getRoleId()
-                )).toList();
+                        membership.getAccount().getId(),
+                        membership.getOrganization().getId(),
+                        membership.getRole().getId()
+                ))
+                .toList();
     }
 
     public void delete(UUID id) {

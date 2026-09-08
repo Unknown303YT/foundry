@@ -1,7 +1,12 @@
 package com.riverstone.unknown303.foundry.server.organization.member;
 
+import com.riverstone.unknown303.foundry.server.account.Account;
+import com.riverstone.unknown303.foundry.server.organization.Organization;
+import com.riverstone.unknown303.foundry.server.organization.role.OrganizationRole;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 import java.util.UUID;
 
@@ -10,34 +15,37 @@ public class OrganizationMembership {
     @Id
     private UUID id;
 
-    private UUID accountId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Account account;
 
-    private UUID organizationId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Organization organization;
 
-    private UUID roleId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private OrganizationRole role;
 
     protected OrganizationMembership() {}
 
-    public OrganizationMembership(UUID id, UUID accountId, UUID organizationId, UUID roleId) {
+    public OrganizationMembership(UUID id, Account account, Organization organization, OrganizationRole role) {
         this.id = id;
-        this.accountId = accountId;
-        this.organizationId = organizationId;
-        this.roleId = roleId;
+        this.account = account;
+        this.organization = organization;
+        this.role = role;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public UUID getAccountId() {
-        return accountId;
+    public Account getAccount() {
+        return account;
     }
 
-    public UUID getOrganizationId() {
-        return organizationId;
+    public Organization getOrganization() {
+        return organization;
     }
 
-    public UUID getRoleId() {
-        return roleId;
+    public OrganizationRole getRole() {
+        return role;
     }
 }
