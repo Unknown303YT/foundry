@@ -35,4 +35,8 @@ public class AccountService {
 
         repository.deleteById(id);
     }
+
+    public AccountResponse toResponse(Account account) {
+        return new AccountResponse(account.getId(), account.getUsername(), account.getEmail());
+    }
 }

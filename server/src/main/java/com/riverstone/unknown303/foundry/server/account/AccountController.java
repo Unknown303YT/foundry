@@ -18,20 +18,23 @@ public class AccountController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Account create(@Valid @RequestBody CreateAccountRequest request) {
-        return accountService.create(
+    public AccountResponse create(@Valid @RequestBody CreateAccountRequest request) {
+        return accountService.toResponse(accountService.create(
                 request.username(), request.email()
-        );
+        ));
     }
 
     @GetMapping
-    public List<Account> findAll() {
-        return accountService.findAll();
+    public List<AccountResponse> findAll() {
+        return accountService.findAll()
+                .stream()
+                .map(accountService::toResponse)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Account findById(@PathVariable UUID id) {
-        return accountService.findById(id);
+    public AccountResponse findById(@PathVariable UUID id) {
+        return accountService.toResponse(accountService.findById(id));
     }
 
     @DeleteMapping("/{id}")
